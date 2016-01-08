@@ -18,6 +18,9 @@ foreach($types as $type) {
   foreach($files as $file) {
     $nlen = max($nlen, strlen(basename($file)));
   }
+  echo str_pad("", $nlen)."  ".str_pad("Original", 10, " ", STR_PAD_BOTH)."  ".str_pad("VCDiff", 16, " ", STR_PAD_BOTH)."  ".str_pad("GZip", 16, " ", STR_PAD_BOTH)."  ".str_pad("Both", 16, " ", STR_PAD_BOTH)."  "."SDCH v.".PHP_EOL;
+  echo str_pad("File Name", $nlen, " ", STR_PAD_LEFT)."  ".str_pad("Size", 10, " ", STR_PAD_BOTH)."  ".str_pad("Size", 10, " ", STR_PAD_BOTH)." Saved"."  ".str_pad("Size", 10, " ", STR_PAD_BOTH)." Saved"."  ".str_pad("Size", 10, " ", STR_PAD_BOTH)." Saved"."  "." GZip  ".PHP_EOL;
+  $base_total = $vcdiff_total = $gzip_total = $both_total = 0;
   foreach($files as $file) {
     $name = basename($file);
     echo str_pad($name, $nlen, " ", STR_PAD_LEFT)."  ";
@@ -37,7 +40,25 @@ foreach($types as $type) {
     echo str_pad(round((($base_size - $both_size) / $base_size)*100, 1)."%", 6, " ", STR_PAD_LEFT)."  (";
     echo str_pad(round((($gzip_size - $both_size) / $gzip_size)*100, 1)."%", 5, " ", STR_PAD_LEFT).")";
 
+    $base_total += $base_size;
+    $vcdiff_total += $vcdiff_size;
+    $gzip_total += $gzip_size;
+    $both_total += $both_size;
+
     echo PHP_EOL;
   }
+  $name = "Totals";
+  echo str_pad($name, $nlen, " ", STR_PAD_LEFT)."  ";
+  echo str_pad(round($base_total/1024, 0)." KB", 10, " ", STR_PAD_LEFT)."  ";
+
+  echo str_pad(round($vcdiff_total/1024, 0)." KB", 10, " ", STR_PAD_LEFT);
+  echo str_pad(round((($base_total - $vcdiff_total) / $base_total)*100, 1)."%", 6, " ", STR_PAD_LEFT)."  ";
+
+  echo str_pad(round($gzip_total/1024, 0)." KB", 10, " ", STR_PAD_LEFT);
+  echo str_pad(round((($base_total - $gzip_total) / $base_total)*100, 1)."%", 6, " ", STR_PAD_LEFT)."  ";
+
+  echo str_pad(round($both_total/1024, 0)." KB", 10, " ", STR_PAD_LEFT);
+  echo str_pad(round((($base_total - $both_total) / $base_total)*100, 1)."%", 6, " ", STR_PAD_LEFT)."  (";
+  echo str_pad(round((($gzip_total - $both_total) / $gzip_total)*100, 1)."%", 5, " ", STR_PAD_LEFT).")";
   echo PHP_EOL;
 }
