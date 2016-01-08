@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Copyright 2015 Innovative Mobile Endeavors, LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/";
 
 # Ensures git is installed and sets the bin
@@ -108,11 +122,6 @@ if [ $? -ne 0 ]; then
   echo ""
 fi
 
-# echo -n "Fetching php-html-parser .."
-# ensuregit
-# getgit "PHP HTML Parser" "https://github.com/paquettg/php-html-parser" "${DIR}php-html-parser"
-# echo ". Done"
-
 PHP=`which php`
 if [ $? -ne 0 ]; then
   echo "ERROR: Missing PHP. Please have a recent version of PHP installed on your system"
@@ -124,19 +133,3 @@ if [ $? -ne 0 ]; then
   echo "ERROR: Missing gzip. Please have a recent version of gzip installed on your system"
   exit 2
 fi
-
-# pushd ${DIR} > /dev/null
-# if [ ! -f "${DIR}composer.phar" ]; then
-#   echo "Installing composer .."
-#   ${PHP} -r "readfile('https://getcomposer.org/installer');" | ${PHP}
-#   if [ ! -f "${DIR}composer.phar" ]; then
-#     echo "ERROR: Unable to install composer"
-#     exit 2
-#   fi
-#   echo ". Done"
-# fi
-# echo "Installing PHP deps .."
-# ${PHP} "-d memory_limit=-1" "${DIR}composer.phar" "self-update"
-# ${PHP} "-d memory_limit=-1" "${DIR}composer.phar" "update"
-# echo " . Done"
-# popd > /dev/null
