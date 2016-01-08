@@ -35,3 +35,5 @@ for file in `ls ${DIR}training-html`; do
   $GZIP -9 < $infile > "${DIR}test-files/training-gzip/${file}.gz"
   $GZIP -9 < "${DIR}test-files/training-vcdiff/${file}.vcdiff" > "${DIR}test-files/training-both/${file}.sdch"
 done
+
+$PHP "${DIR}lib/prepare-report.php"
