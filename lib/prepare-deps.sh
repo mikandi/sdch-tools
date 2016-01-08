@@ -119,6 +119,12 @@ if [ $? -ne 0 ]; then
   exit 2
 fi
 
+GZIP=`which gzip`
+if [ $? -ne 0 ]; then
+  echo "ERROR: Missing gzip. Please have a recent version of gzip installed on your system"
+  exit 2
+fi
+
 # pushd ${DIR} > /dev/null
 # if [ ! -f "${DIR}composer.phar" ]; then
 #   echo "Installing composer .."
