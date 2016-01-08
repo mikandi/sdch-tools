@@ -1,0 +1,10 @@
+bare-html
+testing-html
+training-html
+lib/femtozip
+lib/open-vcdiff
+merged.css
+*.part
+*.bare
+*.dct
+dictionary.config
