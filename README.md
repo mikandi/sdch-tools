@@ -54,3 +54,5 @@ This software is provided under an Apache open source license in the hopes that 
 ## Compatibility
 
 These example programs work on recent OS X and CentOS. In theory, all of these scripts and programs can run on windows, although it will be necessary to convert the BASH scripts to bat scripts. We welcome any pull requests for system compatibility, other interesting test metrics, or other methods of creating the dictionary. In particular, handling the javascript as well as the CSS may result in additional savings.
+
+[![ghit.me](https://ghit.me/badge.svg?repo=mikandi/sdch-tools)](https://ghit.me/repo/mikandi/sdch-tools)
