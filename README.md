@@ -5,6 +5,7 @@ Tools for working with SDCH dictionaries. And some benchmarks.
 
 For basic usage, simply run `./complete.sh`. It will automatically perform the following three steps:
 
+1.  Check for `vcdiff` and `fzip`. In the relatively likely case that these binaries aren't on your system, they will be downloaded and compiled inside the lib folder. The **will not** be installed on your system, but you can `cd` into the lib directory and `make install` on each of them if you want them permanently installed.
 1.  Run `./lib/download-html.sh` to download 30 random pages from Wikipedia. 10 for training and 20 for testing.
 1.  Run `./build-dictionary.sh` to build a dictionary from the training pages.
 1.  Run `./test-sdch.sh` to run VCDiff (SDCH), GZip and SDCH+GZip on all the pages and produce a report of savings.
@@ -47,6 +48,8 @@ The `css-dictionary-extract.php` uses a very simplified CSS parser to generate a
 
 The `create-final-dictionary.php` combines the CSS and bare HTML dictionaries, adds required headers and computes the client and server keys necessary for serving the dictionary. The *bare* dictionary, used for actual encoding will be created as `SERVER_KEY.bare`, while a version with headers will be created as `SERVER_KEY.dct`. Finally, a config file with the client and server keys is created at `dictionary.config`.
 
+Finally, when you're ready to implement SDCH on your site, you'll need binaries of `vcdiff` and `fzip`. The file `./lib/prepare-deps.sh` contains working build commands for both binaries.
+
 ## License
 
 This software is provided under an Apache open source license in the hopes that it may be useful. While these exact files are unlikely to work in exactly the right way for other build workflow, they should provide a complete working example to build from.
@@ -54,5 +57,7 @@ This software is provided under an Apache open source license in the hopes that 
 ## Compatibility
 
 These example programs work on recent OS X and CentOS. In theory, all of these scripts and programs can run on windows, although it will be necessary to convert the BASH scripts to bat scripts. We welcome any pull requests for system compatibility, other interesting test metrics, or other methods of creating the dictionary. In particular, handling the javascript as well as the CSS may result in additional savings.
+
+If you have problems running these programs, particularly in the setup of the `vcdiff` and `fzip` binaries, make sure that you have the basic development tools setup on your system. For example, `yum groupinstall "Development Tools"` on CentOS.
 
 [![ghit.me](https://ghit.me/badge.svg?repo=mikandi/sdch-tools)](https://ghit.me/repo/mikandi/sdch-tools)
